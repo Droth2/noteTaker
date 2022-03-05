@@ -7,4 +7,4 @@ app.use(express.json());
 
 app.listen(PORT, () => {
     console.log(`app server listening on port 3001`);
-})
+});
