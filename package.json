@@ -11,5 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "create-id": "^1.0.2"
   }
 }
