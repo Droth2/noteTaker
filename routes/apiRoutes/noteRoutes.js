@@ -1,17 +1,14 @@
 const router = require('express').Router();
 const { createNote, validateNote, deleteNote, findById } = require('../../lib/notes');
 const notes = require('../../db/db.json');
-const { randomID } = require('create-id');
+const uniqid = require('uniqid');
 
 router.get('/notes', (req, res) => {
     res.json(notes);
 });
 
 router.post('/notes', (req, res) => {
-    const length = 10;
-    const type = ["letter", "number"];
-
-    req.body.id = randomID(length, type);
+    req.body.id = uniqid();
 
     if (!validateNote(req.body)) {
         res.status(400).send('The note was not properly formatted');
@@ -25,9 +22,9 @@ router.delete('/notes/:id', (req, res) => {
     const result = findById(req.params.id, notes);
     if (result) {
         deleteNote(result, notes);
-        res.send('note deleted');
+        res.json('note deleted');
     } else {
-        res.send(404);
+        res.status(404).json({ error: 'note note found'});
     }
 });
 
